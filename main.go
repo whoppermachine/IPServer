@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 	"net"
-	"github.com/whoppermachine/ip/server"
+	"github.com/whoppermachine/IPServer/server"
 	"fmt"
 )
 
@@ -29,8 +29,9 @@ func main() {
 
 func handler(conn net.Conn) {
 	address := conn.RemoteAddr().(*net.TCPAddr)
+	log.Println("Got a request from:", address.IP)
 
-	body := fmt.Sprint("IP ADDRESS: ", address.IP)
+	body := fmt.Sprint(address.IP)
 	response := createHttpHeader(body)
 
 	conn.Write(response)
